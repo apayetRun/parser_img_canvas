@@ -23,6 +23,7 @@
 	<p id="data"></p>
 	<canvas id="representation" width="600" height="600"></canvas>
 	<script src="RGBA.js" > </script>
+	<script src="Reduced_matrix.js"></script>
 	<script >
 		var img = new Image();
 		
@@ -38,6 +39,29 @@
 		var canvas = document.getElementById("representation");
 		var ctx = canvas.getContext("2d");
 		
+		function create_reduced_matrix(array)
+		{
+			var	i;
+			let	px;
+			var	matrix = [];
+		
+			i = 0;
+			while (i < array.length)
+			{
+				px = array.findIndex(el => el.px_linear_pos === i);
+				let element = new Reduced_matrix(i);
+				element
+				.set_value(
+					array[px].matrix_posx,
+					array[px].matrix_posy,
+					array[px].red
+				)
+				matrix.push(element);
+				i++;
+			}
+			console.log(matrix);
+		}
+
 		function check_uniform_rgb(img)
 		{
 			ctx.drawImage(img, 0, 0);
@@ -63,8 +87,8 @@
 				array.push(macolor);
 				i = i + 4;
 			}
-			console.log("Finished");
-			console.log(array);
+			create_reduced_matrix(array);
+			
 		}
 		console.log(ctx);
 	</script>
