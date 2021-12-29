@@ -1,3 +1,15 @@
+<!-- *********************************************************************** -->
+<!--                                                                         -->
+<!--                                                      :::      ::::::::  -->
+<!-- index.html                                         :+:      :+:    :+:  -->
+<!--                                                  +:+ +:+         +:+    -->
+<!-- By: apayet <marvin@42.fr>                      +#+  +:+       +#+       -->
+<!--                                              +#+#+#+#+#+   +#+          -->
+<!-- Created: 2021/12/22 06:12:14 by apayet            #+#    #+#            -->
+<!-- Updated: 2021/12/22 06:13:26 by apayet           ###   ########.fr      -->
+<!--                                                                         -->
+<!-- *********************************************************************** -->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,11 +22,12 @@
 <body>
 	<p id="data"></p>
 	<canvas id="representation" width="600" height="600"></canvas>
+	<script src="RGBA.js" > </script>
 	<script >
 		var img = new Image();
 		
-		img.src = "./sample.jpg"; 
-		img.setAttribute("corsOrigin", '');
+		img.src = "./rgb.png"; 
+		img.setAttribute("corsOrigin", '*');
 
 		var res = [];
 		var render;
@@ -34,17 +47,19 @@
 			var imageData = ctx.getImageData(0, 0, img.width, img.height);
 			var data = imageData.data;
 			var i;
-
-			i = 1;
-			console.log(imageData);
+			i = 0;
+			var array = [];
+			var macolor;
 			while (imageData.data[i] != null)
 			{
-				res.push(data[i - 1]);
-				i = i + 1;
+				macolor = new RGBA(i);
+				macolor.set_img_ref(img.width, img.height);
+				macolor.set_px_color(i , data[i], data[i + 1], data[i + 2], data[i + 3]);
+				array.push(macolor);
+				i = i + 4;
 			}
-			render = res.toString();
 			console.log("Finished");
-			console.log(render);
+			console.log(array);
 		}
 		console.log(ctx);
 	</script>
