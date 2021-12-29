@@ -50,4 +50,32 @@ class RGBA
 		this.img_width = width;
 	}
 
+	set_posx()
+	{	
+		this.matrix_posx = this.px_linear_pos % this.img_width;
+	}
+
+	set_posy()
+	{
+		let	temp;
+		let	y;
+	
+		y = 0;
+		temp = 0;
+		if (this.px_linear_pos < this.img_width)
+			this.matrix_posy = 0;
+		// else if (this.px_linear_pos == this.img_width)
+		// 	this.matrix_posy = 1;
+		else
+		{
+			while (temp < this.px_linear_pos)
+			{
+				temp += this.img_width;
+				y++;
+			}
+			if (!(this.px_linear_pos % this.img_width))
+				y = y + 1;
+			this.matrix_posy = y - 1;
+		}
+	}                                                     
 }

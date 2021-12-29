@@ -55,9 +55,11 @@
 				macolor = new RGBA(i / 4);
 				macolor.set_img_ref(img.width, img.height);
 				macolor.set_px_color(i / 4  , data[i], data[i + 1], data[i + 2], data[i + 3]);
-				macolor.check_non_color_data();
+				//macolor.check_non_color_data();
 				if (macolor.red === undefined)
 					return;
+				macolor.set_posx();
+				macolor.set_posy();
 				array.push(macolor);
 				i = i + 4;
 			}
