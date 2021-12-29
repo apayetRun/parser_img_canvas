@@ -31,6 +31,19 @@ class RGBA
 		}
 	}
 	
+	check_non_color_data()
+	{
+		if (this.green != this.red || this.green != this.blue 
+			|| this.red != this.blue)
+		{
+			this.red = undefined;
+			this.green = undefined;
+			this.blue = undefined;
+			console.error("The image contains color data ! This is not expected, please convert the image into black and white pure color");
+
+		}
+	}
+
 	set_img_ref(width, height)
 	{
 		this.img_heigth = height;
